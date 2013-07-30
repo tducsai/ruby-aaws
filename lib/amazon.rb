@@ -13,8 +13,8 @@ module Amazon
 
   # We're going to have to use String#size if String#bytesize isn't available.
   # This is for Ruby pre-1.8.7.
-  #
-  unless String.instance_methods.include? 'bytesize'
+  # In Ruby 1.9 instance_methods return arrays of symbols not strings.
+  unless String.instance_methods.include?('bytesize') || String.instance_methods.include?(:bytesize)
     String.module_eval( 'alias :bytesize :size' )
   end
 
